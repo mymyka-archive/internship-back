@@ -18,6 +18,12 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
+## Running with Docker
+```
+docker build -t internship-back .
+docker run internship-back
+```
+
 ## Open
 ```
 http://localhost:3000/
@@ -34,4 +40,9 @@ $ npm run test:e2e
 
 # test coverage
 $ npm run test:cov
+```
+## Test with Docker
+```
+docker build -t internship-back-test -f Dockerfile.test .
+docker run internship-back-test
 ```
