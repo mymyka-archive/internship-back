@@ -18,6 +18,11 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
+## Open
+```
+http://localhost:3000/
+```
+
 ## Test
 
 ```bash
