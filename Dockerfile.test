@@ -1,0 +1,17 @@
+FROM node:18
+
+# Set the working directory
+WORKDIR /app
+
+# Copy both package.json and package-lock.json
+COPY package*.json ./
+
+# Install NestJS dependencies and testing libraries
+RUN npm install
+RUN npm install --save-dev @nestjs/testing
+
+# Bundle your source code inside the Docker image
+COPY . .
+
+# Command to run the tests
+CMD [ "npm", "test" ]
