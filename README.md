@@ -21,7 +21,7 @@ $ npm run start:prod
 ## Running with Docker
 ```
 docker build -t internship-back .
-docker run -p3000:3000 internship-back
+docker run -p80:3000 internship-back
 ```
 
 ## Open
