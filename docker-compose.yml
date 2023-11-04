@@ -1,17 +1,41 @@
-version: '3.1'
-
 services:
-  db:
+  api:
+    build:
+      dockerfile: Dockerfile
+      context: .
+      target: development
+    depends_on:
+      - redis
+      - postgres
+    volumes:
+      - .:/app
+    env_file:
+    - .env
+    command: npm run start:dev
+    ports:
+      - ${APP_PORT}:${APP_PORT}
+  
+  redis:
+    image: redis
+    ports:
+      - 6379:6379
+    volumes:
+      - redis:/data
+
+  postgres:
     image: postgres
     restart: always
+    container_name: project_db
     environment:
-      POSTGRES_USER: your_username
-      POSTGRES_PASSWORD: your_password
-      POSTGRES_DB: your_database
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
     ports:
-      - "5432:5432"
+      - '5432:5432'
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - docker-nest-postgres:/var/lib/postgresql/data
 
 volumes:
-  postgres_data:
+  redis:
+    driver: local
+  docker-nest-postgres:
