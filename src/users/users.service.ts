@@ -3,8 +3,10 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { DataSource, Repository } from 'typeorm';
 import { User } from './entities/user.entity';
+import { Logging } from 'src/logging/logging.decorator';
 
 @Injectable()
+@Logging
 export class UsersService {
   private userRepository: Repository<User>;
 
