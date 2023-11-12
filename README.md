@@ -24,6 +24,16 @@ docker build -t internship-back .
 docker run -p80:3000 internship-back
 ```
 
+## Running migrations
+```
+npm run typeorm:run-migrations
+```
+
+### Generate migrations
+```
+npm run typeorm:generate-migrations --name=UserCreate
+```
+
 ## Open
 ```
 http://localhost:3000/
