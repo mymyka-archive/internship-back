@@ -5,6 +5,7 @@ import { UsersModule } from './users/users.module';
 import { DatabaseModule } from './database/database.module';
 import { LoggingModule } from './logging/logging.module';
 import { CustomResponseModule } from './custom-response/custom-response.module';
+import { CustomExceptionsModule } from './custom-exceptions/custom-exceptions.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { CustomResponseModule } from './custom-response/custom-response.module';
     DatabaseModule,
     LoggingModule,
     CustomResponseModule,
+    CustomExceptionsModule,
   ],
   controllers: [],
   providers: [],
