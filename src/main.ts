@@ -1,5 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
+import { GeneralResponseInterseptor } from './custom-response/interceptor/general-response.interceptor';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -11,6 +12,7 @@ async function bootstrap() {
     credentials: true,
     allowedHeaders: 'Content-Type, Accept',
   });
+  app.useGlobalInterceptors(new GeneralResponseInterseptor());
   await app.listen(process.env.APP_PORT || 3000);
 }
 bootstrap();
