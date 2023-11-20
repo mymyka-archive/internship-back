@@ -4,6 +4,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { DataSource, Repository } from 'typeorm';
 import { User } from './entities/user.entity';
 import { Logging } from 'src/logging/logging.decorator';
+import { hashString } from './utils/bcrypt.util';
 
 @Injectable()
 @Logging
@@ -15,7 +16,11 @@ export class UsersService {
   }
 
   async create(createUserDto: CreateUserDto): Promise<User> {
-    const user = this.userRepository.create(createUserDto);
+    const password = await hashString(createUserDto.password);
+    const user = this.userRepository.create({
+      ...createUserDto,
+      password,
+    });
     return this.userRepository.save(user);
   }
 
@@ -32,8 +37,10 @@ export class UsersService {
     if (!isExist) {
       return null;
     }
-    await this.userRepository.update(id, updateUserDto);
-    return this.userRepository.findOne({ where: { id: id } });
+    if (updateUserDto.password) {
+      updateUserDto.password = await hashString(updateUserDto.password);
+    }
+    return this.userRepository.save({ ...updateUserDto, id });
   }
 
   async remove(id: number) {
