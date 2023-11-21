@@ -35,7 +35,7 @@ export class UsersService {
   async update(id: number, updateUserDto: UpdateUserDto): Promise<User> {
     const isExist = await this.userRepository.findOne({ where: { id: id } });
     if (!isExist) {
-      return null;
+      throw new Error('User not found');
     }
     if (updateUserDto.password) {
       updateUserDto.password = await hashString(updateUserDto.password);

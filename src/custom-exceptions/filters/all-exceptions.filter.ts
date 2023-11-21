@@ -21,9 +21,9 @@ export class AllExceptionsFilter extends BaseExceptionFilter {
     const responseBody = {
       statusCode: httpStatus,
       timeStamp: new Date().toISOString(),
-      path: httpAdapter.getRequestUrl(ctx.getRequest()),
+      path: httpAdapter?.getRequestUrl(ctx.getRequest()),
     };
 
-    httpAdapter.reply(ctx.getResponse(), responseBody, httpStatus);
+    httpAdapter?.reply(ctx.getResponse(), responseBody, httpStatus);
   }
 }
